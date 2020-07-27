@@ -1,0 +1,127 @@
+interface Vehicle { 
+	int set_num_of_wheels() 
+	int set_num_of_passengers() 
+	boolean has_gas()  
+	} 
+
+a) Explain how you can use the pattern to create car and plane class? 
+
+Here Vehicle is base class, Car & palne are sub class.
+
+Class Car implemnts Vehicle{
+	public int set_num_of_wheels(){
+		return 4;
+		}
+	}
+	public int set_num_of_passengers(){
+		return 5;
+		}
+	}
+	
+	public boolean has_gas(){
+		return true;
+		}
+	}
+}
+Class Plane implements Vehicle{
+	public int set_num_of_wheels(){
+		return 3;
+		}
+	}
+	public int set_num_of_passengers(){
+		return 150;
+		}
+	}
+	
+	public boolean has_gas(){
+		return false;
+		}
+	}
+}
+
+
+b) Use a different design pattern for this solution.
+
+I will be going to use Decorator design pattern for this solution. The Decorator Pattern uses 
+composition instead of inheritance to extend the functionality of an object at runtime.
+The Decorator Pattern is also known as Wrapper.
+
+	interface Vehicle {
+		int set_num_of_wheels()
+		int set_num_of_passengers()
+		boolean has_gas()
+	}
+	
+	public class BaseVehicle implements Vehicle {
+
+	protected Vehicle vehicle;
+	
+	public BaseVehicle(Vehicle c){
+		this.vehicle=c;
+	}
+	
+	@Override
+	public int set_num_of_wheels() {
+		this.vehicle.set_num_of_wheels();
+	}
+	@Override
+	public int set_num_of_passengers() {
+		this.vehicle.set_num_of_passengers();
+	}
+	
+	@Override
+	public boolean has_gas() {
+		this.vehicle.has_gas();
+	}
+	}
+
+	 Now Extending the base decorator functionality and modifying the component behavior accordingly.
+	 We can have concrete decorator classes as Car and Plane
+ 
+ 	public class Car extends BaseVehicle {
+	public Car(Car c) {
+		super(c);
+	}
+
+	@Override
+	public int set_num_of_wheels(){
+		super.set_num_of_wheels();
+		return 4;
+	}
+	
+	@Override
+	public int set_num_of_passengers(){
+		super.set_num_of_passengers();
+		return 5;
+	}
+	
+	@Override
+	public boolean has_gas(){
+		super.has_gas();
+		return true;
+	}
+	}
+
+	public class Plane extends BaseVehicle {
+	public Plane(Plane p) {
+		super(p);
+	}
+
+	@Override
+	public int set_num_of_wheels(){
+		super.set_num_of_wheels();
+		return 3;
+	}
+	
+	@Override
+	public int set_num_of_passengers(){
+		super.set_num_of_passengers();
+		return 150;
+	}
+	
+	@Override
+	public boolean has_gas(){
+		super.has_gas();
+		return false;
+	}
+}
